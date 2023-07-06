@@ -3,11 +3,14 @@ package com.pokemon.pokemon.controller;
 
 import com.pokemon.pokemon.model.FavouritePokemon;
 import com.pokemon.pokemon.model.Pokemon;
+import com.pokemon.pokemon.repository.FavouritePokemonRepository;
 import com.pokemon.pokemon.service.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin(origins = "http://127.0.0.1:5173")
 @RestController
@@ -15,10 +18,11 @@ import org.springframework.web.bind.annotation.*;
 public class PokemonController {
 
     private final PokemonService pokemonService;
-
+    private final FavouritePokemonRepository favouritePokemonRepository;
     @Autowired
-    public PokemonController(PokemonService pokemonService) {
+    public PokemonController(PokemonService pokemonService, FavouritePokemonRepository favouritePokemonRepository) {
         this.pokemonService = pokemonService;
+        this.favouritePokemonRepository = favouritePokemonRepository;
     }
 
     @GetMapping("/{name}")
@@ -31,5 +35,11 @@ public class PokemonController {
         Pokemon pokemon = pokemonService.getAPokemon(name);
         FavouritePokemon favouritePokemon = pokemonService.saveFavouritePokemon(pokemon);
         return new ResponseEntity<>(favouritePokemon, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/favourites")
+    public ResponseEntity<List<FavouritePokemon>> getFavouritePokemons() {
+        List<FavouritePokemon> favouritePokemons = favouritePokemonRepository.findAll();
+        return new ResponseEntity<>(favouritePokemons, HttpStatus.OK);
     }
 }
