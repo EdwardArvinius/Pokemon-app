@@ -32,7 +32,9 @@ const PokemonSearch: React.FC = () => {
     
     return (
     <div>
-    
+        <input value={pokemonName} onChange={e => setPokemonName(e.target.value)} />
+        <button onClick={searchPokemon}>Search</button>
+
     </div>
     );
     };
