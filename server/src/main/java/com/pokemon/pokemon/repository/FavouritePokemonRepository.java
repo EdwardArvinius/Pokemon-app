@@ -24,5 +24,4 @@ public class FavouritePokemonRepository {
         return jpaFavouritePokemonRepository.findAll();
     }
 
-    // Add more methods as required
 }

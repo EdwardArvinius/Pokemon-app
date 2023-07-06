@@ -3,7 +3,9 @@ package com.pokemon.pokemon.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pokemon.pokemon.model.FavouritePokemon;
 import com.pokemon.pokemon.model.Pokemon;
+import com.pokemon.pokemon.repository.FavouritePokemonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +20,25 @@ import java.util.Map;
 
 @Service
 public class PokemonService {
+
     private final RestTemplate restTemplate;
+    private final FavouritePokemonRepository favouritePokemonRepository;
 
     @Autowired
-    public PokemonService(RestTemplateBuilder restTemplateBuilder) {
+    public PokemonService(RestTemplateBuilder restTemplateBuilder, FavouritePokemonRepository favouritePokemonRepository) {
         this.restTemplate = restTemplateBuilder.build();
+        this.favouritePokemonRepository = favouritePokemonRepository;
     }
+
+
+    public FavouritePokemon saveFavouritePokemon(FavouritePokemon favouritePokemon) {
+        return favouritePokemonRepository.save(favouritePokemon);
+    }
+
+    public List<FavouritePokemon> getAllFavouritePokemon() {
+        return favouritePokemonRepository.findAll();
+    }
+
 
     public Pokemon getAPokemon(String name) {
         ResponseEntity<String> response = restTemplate.getForEntity(
