@@ -29,14 +29,14 @@ public class PokemonController {
     public ResponseEntity<Pokemon> getPokemon(@PathVariable String name) {
         return new ResponseEntity<>(pokemonService.getAPokemon(name), HttpStatus.OK);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/favourites/{name}")
     public ResponseEntity<FavouritePokemon> addFavouritePokemon(@PathVariable String name) {
         Pokemon pokemon = pokemonService.getAPokemon(name);
         FavouritePokemon favouritePokemon = pokemonService.saveFavouritePokemon(pokemon);
         return new ResponseEntity<>(favouritePokemon, HttpStatus.CREATED);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/favourites")
     public ResponseEntity<List<FavouritePokemon>> getFavouritePokemons() {
         List<FavouritePokemon> favouritePokemons = favouritePokemonRepository.findAll();
