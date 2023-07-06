@@ -126,7 +126,21 @@ const PokemonSearch: React.FC = () => {
                     <button onClick={savePokemon}>Save</button>
                 </div>
             )}
-
+            <div>
+                <h2>Favourite Pokemons:</h2>
+                {favoritePokemons.map((pokemon, index) => (
+                    <div key={index}>
+                        <h1>{pokemon.name}</h1>
+                        <img src={pokemon.image} alt={pokemon.name} />
+                        <p>Type: {pokemon.type}</p>
+                        <p>Abilities: {pokemon.abilities.join(', ')}</p>
+                        <p>Health: {pokemon.stats["hp"]}</p>
+                        <p>Attack: {pokemon.stats["attack"]}</p>
+                        <p>Defense: {pokemon.stats["defense"]}</p>
+                        <p>Speed: {pokemon.stats["speed"]}</p>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
