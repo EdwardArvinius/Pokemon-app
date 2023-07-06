@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://127.0.0.1:5173")
+//@CrossOrigin(origins = "http://127.0.0.1:5173")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/v2/pokemon")
 public class PokemonController {
@@ -29,21 +30,23 @@ public class PokemonController {
     public ResponseEntity<Pokemon> getPokemon(@PathVariable String name) {
         return new ResponseEntity<>(pokemonService.getAPokemon(name), HttpStatus.OK);
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/favourites/{name}")
     public ResponseEntity<FavouritePokemon> addFavouritePokemon(@PathVariable String name) {
         Pokemon pokemon = pokemonService.getAPokemon(name);
         FavouritePokemon favouritePokemon = pokemonService.saveFavouritePokemon(pokemon);
         return new ResponseEntity<>(favouritePokemon, HttpStatus.CREATED);
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+   // @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/favourites")
     public ResponseEntity<List<FavouritePokemon>> getFavouritePokemons() {
         List<FavouritePokemon> favouritePokemons = favouritePokemonRepository.findAll();
         return new ResponseEntity<>(favouritePokemons, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+
+    //@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "http://127.0.0.1:5173")
+    //@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.OPTIONS}, allowedHeaders = "*")
     @DeleteMapping("/favourites/{id}")
     public ResponseEntity<Void> deleteFavouritePokemon(@PathVariable Long id) {
         pokemonService.deleteFavouritePokemon(id);

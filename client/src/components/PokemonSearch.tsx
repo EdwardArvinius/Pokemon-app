@@ -53,6 +53,7 @@ const PokemonSearch: React.FC = () => {
     const deleteFavoritePokemon = async (pokemonId: number) => {
         try {
             await axios.delete(`http://localhost:8080/api/v2/pokemon/favourites/${pokemonId}`);
+            console.log(pokemonId);
             fetchFavoritePokemons();  
         } catch (error) {
             console.error(error);
