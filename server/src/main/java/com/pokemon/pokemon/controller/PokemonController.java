@@ -1,6 +1,7 @@
 package com.pokemon.pokemon.controller;
 
 
+import com.pokemon.pokemon.model.FavouritePokemon;
 import com.pokemon.pokemon.model.Pokemon;
 import com.pokemon.pokemon.service.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,10 @@ public class PokemonController {
         return new ResponseEntity<>(pokemonService.getAPokemon(name), HttpStatus.OK);
     }
 
-    
+    @PostMapping("/favourites/{name}")
+    public ResponseEntity<FavouritePokemon> addFavouritePokemon(@PathVariable String name) {
+        Pokemon pokemon = pokemonService.getAPokemon(name);
+        FavouritePokemon favouritePokemon = pokemonService.saveFavouritePokemon(pokemon);
+        return new ResponseEntity<>(favouritePokemon, HttpStatus.CREATED);
+    }
 }
