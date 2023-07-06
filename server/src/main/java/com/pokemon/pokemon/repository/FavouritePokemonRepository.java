@@ -24,4 +24,8 @@ public class FavouritePokemonRepository {
         return jpaFavouritePokemonRepository.findAll();
     }
 
+    public void deleteById(Long id) {
+        jpaFavouritePokemonRepository.deleteById(id);
+    }
+
 }
