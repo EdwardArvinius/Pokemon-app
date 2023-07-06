@@ -87,5 +87,9 @@ public class PokemonService {
 
         return pokemon;
     }
+
+    public void deleteFavouritePokemon(Long id) {
+        favouritePokemonRepository.deleteById(id);
+    }
 }
 
