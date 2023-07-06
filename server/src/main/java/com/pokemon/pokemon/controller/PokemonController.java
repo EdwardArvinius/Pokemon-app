@@ -43,6 +43,7 @@ public class PokemonController {
         return new ResponseEntity<>(favouritePokemons, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/favourites/{id}")
     public ResponseEntity<Void> deleteFavouritePokemon(@PathVariable Long id) {
         pokemonService.deleteFavouritePokemon(id);
