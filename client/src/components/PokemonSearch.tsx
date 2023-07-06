@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 interface Pokemon {
+    id: number;
     name: string;
     abilities: string[];
     stats: Record<string, number>;
@@ -89,6 +90,7 @@ const PokemonSearch: React.FC = () => {
                         <p>Attack: {pokemon.stats["attack"]}</p>
                         <p>Defense: {pokemon.stats["defense"]}</p>
                         <p>Speed: {pokemon.stats["speed"]}</p>
+                        <button onClick={() => deleteFavoritePokemon(pokemon.id)}>Delete</button>
                     </div>
                 ))}
             </div>
