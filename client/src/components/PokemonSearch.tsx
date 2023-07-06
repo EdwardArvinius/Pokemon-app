@@ -97,7 +97,15 @@ const PokemonSearch: React.FC = () => {
         }
     };
 
+    useEffect(() => {
+        const fetchFavoritePokemons = async () => {
+            const response = await axios.get<Pokemon[]>('http://localhost:8080/api/v2/pokemon/favourites');
+            setFavoritePokemons(response.data);
+        };
 
+
+        fetchFavoritePokemons();
+    }, []);
 
     return (
         <div>
