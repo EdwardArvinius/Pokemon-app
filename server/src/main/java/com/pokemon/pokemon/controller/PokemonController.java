@@ -42,4 +42,10 @@ public class PokemonController {
         List<FavouritePokemon> favouritePokemons = favouritePokemonRepository.findAll();
         return new ResponseEntity<>(favouritePokemons, HttpStatus.OK);
     }
+
+    @DeleteMapping("/favourites/{id}")
+    public ResponseEntity<Void> deleteFavouritePokemon(@PathVariable Long id) {
+        pokemonService.deleteFavouritePokemon(id);
+        return ResponseEntity.ok().build();
+    }
 }
