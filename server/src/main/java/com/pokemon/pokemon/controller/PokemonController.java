@@ -24,4 +24,6 @@ public class PokemonController {
     public ResponseEntity<Pokemon> getPokemon(@PathVariable String name) {
         return new ResponseEntity<>(pokemonService.getAPokemon(name), HttpStatus.OK);
     }
+
+    
 }

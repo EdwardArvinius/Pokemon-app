@@ -31,7 +31,14 @@ public class PokemonService {
     }
 
 
-    public FavouritePokemon saveFavouritePokemon(FavouritePokemon favouritePokemon) {
+    public FavouritePokemon saveFavouritePokemon(Pokemon pokemon) {
+        FavouritePokemon favouritePokemon = new FavouritePokemon();
+        favouritePokemon.setName(pokemon.getName());
+        favouritePokemon.setAbilities(pokemon.getAbilities());
+        favouritePokemon.setStats(pokemon.getStats());
+        favouritePokemon.setType(pokemon.getType());
+        favouritePokemon.setImage(pokemon.getImage());
+
         return favouritePokemonRepository.save(favouritePokemon);
     }
 

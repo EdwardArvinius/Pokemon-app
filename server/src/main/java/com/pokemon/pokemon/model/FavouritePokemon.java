@@ -2,16 +2,42 @@ package com.pokemon.pokemon.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+import java.util.Map;
+
 @Entity
 @Table(name = "favourite_pokemons")
 public class FavouritePokemon {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
-    private String abilities;
-    private String stats;
+
+    public List<String> getAbilities() {
+        return abilities;
+    }
+
+    public void setAbilities(List<String> abilities) {
+        this.abilities = abilities;
+    }
+
+    public Map<String, Integer> getStats() {
+        return stats;
+    }
+
+    public void setStats(Map<String, Integer> stats) {
+        this.stats = stats;
+    }
+
+    @ElementCollection
+    private List<String> abilities;
+
+    @ElementCollection
+    @MapKeyColumn(name="stat_name")
+    @Column(name="value")
+    private Map<String, Integer> stats;
+
     private String type;
     private String image;
 
@@ -31,21 +57,7 @@ public class FavouritePokemon {
         this.name = name;
     }
 
-    public String getAbilities() {
-        return abilities;
-    }
 
-    public void setAbilities(String abilities) {
-        this.abilities = abilities;
-    }
-
-    public String getStats() {
-        return stats;
-    }
-
-    public void setStats(String stats) {
-        this.stats = stats;
-    }
 
     public String getType() {
         return type;
