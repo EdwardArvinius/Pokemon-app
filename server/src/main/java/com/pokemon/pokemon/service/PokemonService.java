@@ -30,7 +30,6 @@ public class PokemonService {
         this.favouritePokemonRepository = favouritePokemonRepository;
     }
 
-
     public FavouritePokemon saveFavouritePokemon(Pokemon pokemon) {
         FavouritePokemon favouritePokemon = new FavouritePokemon();
         favouritePokemon.setName(pokemon.getName());
@@ -49,9 +48,7 @@ public class PokemonService {
 
     public Pokemon getAPokemon(String name) {
         ResponseEntity<String> response = restTemplate.getForEntity(
-                "https://pokeapi.co/api/v2/pokemon/" + name,
-                String.class
-        );
+                "https://pokeapi.co/api/v2/pokemon/" + name, String.class);
 
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode root = null;
@@ -64,12 +61,9 @@ public class PokemonService {
 
         Pokemon pokemon = new Pokemon();
 
-
         pokemon.setName(root.path("name").asText());
 
-
         pokemon.setImage(root.path("sprites").path("front_default").asText());
-
 
         List<String> abilities = new ArrayList<>();
         root.path("abilities").forEach(a -> {

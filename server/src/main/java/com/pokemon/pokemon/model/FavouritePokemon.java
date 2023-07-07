@@ -57,8 +57,6 @@ public class FavouritePokemon {
         this.name = name;
     }
 
-
-
     public String getType() {
         return type;
     }

@@ -1,19 +1,18 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import PokemonInfo from './components/PokemonSearch';
+import PokemonSearch from './components/PokemonSearch';
+import FavouritePokemon from './components/FavouritePokemon';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-
-<div className="App">
-      <h1>Pokédex</h1>
-      <PokemonInfo />
-    </div>
+      <div className="App">
+        <h1>Pokédex</h1>
+        <PokemonSearch />
+        <FavouritePokemon />
+      </div>
     </>
   )
 }
