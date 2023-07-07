@@ -31,6 +31,13 @@ public class FavouritePokemonRepositoryTest {
         testFavouritePokemon.setName("Pikachu");
     }
 
+    @Test
+    public void testSaveFavouritePokemon() {
+        when(jpaFavouritePokemonRepository.save(any(FavouritePokemon.class))).thenReturn(testFavouritePokemon);
+        FavouritePokemon result = favouritePokemonRepository.save(testFavouritePokemon);
 
+        verify(jpaFavouritePokemonRepository, times(1)).save(testFavouritePokemon);
+        assertEquals(testFavouritePokemon, result);
+    }
 
 }
