@@ -24,6 +24,13 @@ public class FavouritePokemonRepositoryTest {
 
     private FavouritePokemon testFavouritePokemon;
 
+    @BeforeEach
+    public void setUp() {
+        testFavouritePokemon = new FavouritePokemon();
+        testFavouritePokemon.setId(1L);
+        testFavouritePokemon.setName("Pikachu");
+    }
+
 
 
 }
