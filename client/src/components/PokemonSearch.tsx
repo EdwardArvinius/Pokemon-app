@@ -24,21 +24,28 @@ const PokemonSearch: React.FC = () => {
             const res = await axios.get<Pokemon>(`http://localhost:8080/api/v2/pokemon/${pokemonName}`);
             setPokemonData(res.data);
         } catch (err) {
-            setError(err.message);
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError(JSON.stringify(err));
+            }
         }
         setIsLoading(false);
     };
+    
+
 
     const savePokemon = async () => {
         if (pokemonData) {
             try {
-                await axios.post(`http://localhost:8080/api/v2/pokemon/favourites/${pokemonData.name}`);
-                setFavoritePokemons([...favoritePokemons, pokemonData]);
+                const res = await axios.post(`http://localhost:8080/api/v2/pokemon/favourites/${pokemonData.name}`);
+                const savedPokemon = res.data;
+                setFavoritePokemons([...favoritePokemons, savedPokemon]);
             } catch (err) {
                 console.error(err);
             }
         }
-    };
+};
 
 
     const fetchFavoritePokemons = async () => {
@@ -50,6 +57,7 @@ const PokemonSearch: React.FC = () => {
         fetchFavoritePokemons();
     }, []);
 
+
     const deleteFavoritePokemon = async (pokemonId: number) => {
         try {
             await axios.delete(`http://localhost:8080/api/v2/pokemon/favourites/${pokemonId}`);
@@ -58,7 +66,8 @@ const PokemonSearch: React.FC = () => {
         } catch (error) {
             console.error(error);
         }
-    };
+};
+
 
     return (
         <div>

@@ -1,2 +1,0 @@
-INSERT INTO movie (title, release_date, image_url, genre) VALUES ('The Office', '2007-12-03', 'https://www.media4.hw-static.com/wp-content/uploads/the-office-product-recall_55012581-1920x1080.jpeg', 'Comedy') ON CONFLICT DO NOTHING;
-INSERT INTO movie (title, release_date, image_url, genre) VALUES ('Office', '2007-12-03', 'https://www.media4.hw-static.com/wp-content/uploads/the-office-product-recall_55012581-1920x1080.jpeg', 'Comedy') ON CONFLICT DO NOTHING;
