@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 
 interface Pokemon {
@@ -10,22 +10,16 @@ interface Pokemon {
     image: string;
 }
 
-const FavouritePokemon: React.FC = () => {
-    const [favoritePokemons, setFavoritePokemons] = useState<Pokemon[]>([]);
+interface Props {
+    favoritePokemons: Pokemon[];
+}
 
-    const fetchFavoritePokemons = async () => {
-        const response = await axios.get<Pokemon[]>('http://localhost:8080/api/v2/pokemon/favourites');
-        setFavoritePokemons(response.data);
-    };
-
-    useEffect(() => {
-        fetchFavoritePokemons();
-    }, []);
+const FavouritePokemon: React.FC<Props> = ({ favoritePokemons }) => {
 
     const deleteFavoritePokemon = async (pokemonId: number) => {
         try {
             await axios.delete(`http://localhost:8080/api/v2/pokemon/favourites/${pokemonId}`);
-            fetchFavoritePokemons();  
+            // fetchFavoritePokemons();  
         } catch (error) {
             console.error(error);
         }
