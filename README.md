@@ -28,3 +28,4 @@ This is a simple web application that allows users to search for Pokémon and ge
 
 - Letting user add a nickname to a favourite Pokemon
 - Letting user add a description to a favourite Pokemon
+
